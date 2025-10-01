@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tuyển CTV Giám Sát - LOL CSEsports</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(26, 26, 46, 0.9);
+            border-radius: 15px;
+            border: 2px solid #00ffff;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(45deg, #ff006e, #8338ec, #3a86ff);
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .tournament-logo {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+            letter-spacing: 3px;
+        }
+
+        .tournament-theme {
+            font-size: 1.2em;
+            color: #00ffff;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .tournament-slogan {
+            font-style: italic;
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+
+        .form-content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.4em;
+            color: #00ffff;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ff006e;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .required {
+            color: #ff006e;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #3a86ff;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            color: #ffffff;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: #00ffff;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .situation-question {
+            background: rgba(58, 134, 255, 0.1);
+            border-left: 4px solid #3a86ff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .situation-title {
+            color: #00ffff;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .situation-content {
+            color: #ffffff;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .criteria-list {
+            background: rgba(255, 0, 110, 0.1);
+            border-left: 4px solid #ff006e;
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .criteria-list ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .criteria-list li {
+            color: #ffffff;
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .criteria-list li::before {
+            content: '▶';
+            color: #00ffff;
+            position: absolute;
+            left: 0;
+        }
+
+        .submit-section {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 2px solid #3a86ff;
+        }
+
+        .submit-button {
+            background: linear-gradient(45deg, #ff006e, #8338ec);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 0, 110, 0.3);
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 0, 110, 0.5);
+        }
+
+        .info-note {
+            background: rgba(131, 56, 236, 0.1);
+            border: 1px solid #8338ec;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: #ffffff;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .tournament-info {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 1px solid #00ffff;
+        }
+
+        .tournament-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .detail-item {
+            background: rgba(58, 134, 255, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+            border-left: 3px solid #3a86ff;
+        }
+
+        .detail-label {
+            color: #00ffff;
+            font-weight: bold;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        .detail-value {
+            color: #ffffff;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+            }
+            
+            .form-content {
+                padding: 20px;
+            }
+            
+            .tournament-logo {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <div class="tournament-logo">LOL CSEsports</div>
+                <div class="tournament-theme">UNHINGED PLAYS</div>
+                <div class="tournament-slogan">"Học giỏi - Chơi hay"</div>
+                <h2 style="margin-top: 20px; color: #ffffff;">TUYỂN CỘNG TÁC VIÊN GIÁM SÁT TRẬN ĐẤU</h2>
+            </div>
+        </div>
+
+        <div class="form-content">
+            <div class="tournament-info">
+                <h3 style="color: #00ffff; margin-bottom: 15px;">📋 THÔNG TIN GIẢI ĐẤU</h3>
+                <div class="tournament-details">
+                    <div class="detail-item">
+                        <div class="detail-label">Tên giải</div>
+                        <div class="detail-value">LOL CSEsports</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Thời gian</div>
+                        <div class="detail-value">4 tuần (Bắt đầu: 06/12/2025)</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Quy mô</div>
+                        <div class="detail-value">Toàn thể sinh viên ĐH Bách Khoa</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Địa điểm tổ chức Event</div>
+                        <div class="detail-value">Thông báo sau</div>
+                    </div>
+                </div>
+            </div>
+
+            <form id="ctvForm">
+                <!-- THÔNG TIN CÁ NHÂN -->
+                <div class="section">
+                    <h3 class="section-title">👤 Thông tin cá nhân</h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Họ và tên <span class="required">*</span></label>
+                        <input type="text" class="form-input" name="fullName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Tuổi <span class="required">*</span></label>
+                        <input type="number" class="form-input" name="age" min="18" max="30" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Số điện thoại <span class="required">*</span></label>
+                        <input type="tel" class="form-input" name="phone" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Email <span class="required">*</span></label>
+                        <input type="email" class="form-input" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Tài khoản Discord <span class="required">*</span></label>
+                        <input type="text" class="form-input" name="discord" placeholder="username#1234" required>
+                    </div>
+                </div>
+
+                <!-- THÔNG TIN GAME -->
+                <div class="section">
+                    <h3 class="section-title">🎮 Thông tin game</h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Tên tài khoản LOL <span class="required">*</span></label>
+                        <input type="text" class="form-input" name="gameName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Rank hiện tại <span class="required">*</span></label>
+                        <select class="form-select" name="currentRank" required>
+                            <option value="">-- Chọn rank --</option>
+                            <option value="Iron">Iron</option>
+                            <option value="Bronze">Bronze</option>
+                            <option value="Silver">Silver</option>
+                            <option value="Gold">Gold</option>
+                            <option value="Platinum">Platinum</option>
+                            <option value="Emerald">Emerald</option>
+                            <option value="Diamond">Diamond</option>
+                            <option value="Master">Master</option>
+                            <option value="Grandmaster">Grandmaster</option>
+                            <option value="Challenger">Challenger</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Link OP.GG hoặc U.GG để xác thực <span class="required">*</span></label>
+                        <input type="url" class="form-input" name="profileLink" placeholder="https://..." required>
+                    </div>
+                </div>
+
+                <!-- KINH NGHIỆM -->
+                <div class="section">
+                    <h3 class="section-title">💼 Kinh nghiệm</h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Bạn đã từng làm CTV giám sát trận đấu hoặc tham gia tổ chức giải đấu nào chưa? <span class="required">*</span></label>
+                        <textarea class="form-textarea" name="experience" placeholder="Mô tả chi tiết kinh nghiệm của bạn (nếu có). Nếu chưa có kinh nghiệm, hãy viết 'Chưa có kinh nghiệm'." required></textarea>
+                    </div>
+                </div>
+
+                <!-- CAM KẾT -->
+                <div class="section">
+                    <h3 class="section-title">🤝 Cam kết</h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Bạn có thể cam kết tham gia đầy đủ trong thời gian diễn ra giải đấu không? <span class="required">*</span></label>
+                        <select class="form-select" name="commitment" required>
+                            <option value="">-- Chọn mức độ cam kết --</option>
+                            <option value="Có, tôi có thể tham gia đầy đủ">Có, tôi có thể tham gia đầy đủ</option>
+                            <option value="Có thể tham gia phần lớn thời gian">Có thể tham gia phần lớn thời gian</option>
+                            <option value="Chỉ có thể tham gia một phần">Chỉ có thể tham gia một phần</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Thời gian bạn có thể tham gia trong ngày (nếu có hạn chế)</label>
+                        <textarea class="form-textarea" name="availability" placeholder="Ví dụ: Có thể tham gia từ 18h-22h các ngày cuối tuần..."></textarea>
+                    </div>
+                </div>
+
+                <!-- CÂU HỎI TÌNH HUỐNG -->
+                <div class="section">
+                    <h3 class="section-title">🧠 Câu hỏi tình huống</h3>
+                    
+                    <div class="info-note">
+                        <strong>Lưu ý:</strong> Các câu hỏi sau đây nhằm đánh giá khả năng xử lý tình huống của bạn trong vai trò CTV giám sát. Hãy trả lời một cách nghiêm túc và chi tiết.
+                    </div>
+
+                    <div class="situation-question">
+                        <div class="situation-title">Tình huống 1:</div>
+                        <div class="situation-content">Một tuyển thủ bị disconnect giữa trận đấu. Bạn sẽ xử lý tình huống này như thế nào?</div>
+                        <textarea class="form-textarea" name="situation1" placeholder="Trả lời chi tiết cách bạn sẽ xử lý..." required></textarea>
+                    </div>
+
+                    <div class="situation-question">
+                        <div class="situation-title">Tình huống 2:</div>
+                        <div class="situation-content">Hai đội tranh cãi về việc một bên pick nhầm tướng trong giai đoạn chọn tướng. Bạn sẽ làm gì để giải quyết?</div>
+                        <textarea class="form-textarea" name="situation2" placeholder="Trả lời chi tiết cách bạn sẽ xử lý..." required></textarea>
+                    </div>
+
+                    <div class="situation-question">
+                        <div class="situation-title">Tình huống 3:</div>
+                        <div class="situation-content">Phát hiện có bug game xảy ra trong trận đấu (ví dụ: tướng bị stuck, skill không hoạt động). Quy trình xử lý của bạn là gì?</div>
+                        <textarea class="form-textarea" name="situation3" placeholder="Trả lời chi tiết cách bạn sẽ xử lý..." required></textarea>
+                    </div>
+
+                    <div class="situation-question">
+                        <div class="situation-title">Tình huống 4:</div>
+                        <div class="situation-content">Một đội khiếu nại rằng đối thủ sử dụng skin gây lag hoặc ảnh hưởng đến hiệu suất game. Bạn sẽ xử lý ra sao?</div>
+                        <textarea class="form-textarea" name="situation4" placeholder="Trả lời chi tiết cách bạn sẽ xử lý..." required></textarea>
+                    </div>
+
+                    <div class="situation-question">
+                        <div class="situation-title">Tình huống 5:</div>
+                        <div class="situation-content">Trong một trận đấu quan trọng, bạn phát hiện một tuyển thủ có hành vi không fair play (ví dụ: toxic, chửi đối thủ). Bạn sẽ can thiệp như thế nào?</div>
+                        <textarea class="form-textarea" name="situation5" placeholder="Trả lời chi tiết cách bạn sẽ xử lý..." required></textarea>
+                    </div>
+                </div>
+
+                <!-- TIÊU CHÍ ĐÁNH GIÁ -->
+                <div class="section">
+                    <h3 class="section-title">📋 Tiêu chí đánh giá</h3>
+                    
+                    <div class="criteria-list">
+                        <ul>
+                            <li>Rank đạt yêu cầu (khuyến nghị Kim Cương IV trở lên)</li>
+                            <li>Câu trả lời tình huống thể hiện sự hiểu biết cơ bản về quy trình xử lý</li>
+                            <li>Thái độ trả lời nghiêm túc, rõ ràng và logic</li>
+                            <li>Kinh nghiệm tổ chức hoặc tham gia các giải đấu esports</li>
+                            <li>Khả năng cam kết thời gian trong suốt giải đấu</li>
+                            <li>Kỹ năng giao tiếp và xử lý tình huống</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- THÔNG TIN BỔ SUNG -->
+                <div class="section">
+                    <h3 class="section-title">📝 Thông tin bổ sung</h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Điều gì khiến bạn muốn trở thành CTV giám sát cho LOL CSEsports?</label>
+                        <textarea class="form-textarea" name="motivation" placeholder="Chia sẻ động lực và mong muốn của bạn..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Bạn có kỹ năng đặc biệt nào khác có thể hỗ trợ cho giải đấu không?</label>
+                        <textarea class="form-textarea" name="additionalSkills" placeholder="Ví dụ: Streaming, quay phim, chỉnh sửa video, thiết kế đồ họa..."></textarea>
+                    </div>
+                </div>
+
+                <div class="submit-section">
+                    <div class="info-note">
+                        <strong>Thời gian đăng ký:</strong> 1 tuần kể từ khi form được công bố<br>
+                        <strong>Kết quả:</strong> Sẽ được thông báo qua email và Discord trong vòng 1-3 ngày sau khi đóng form<br>
+                        <strong>Liên hệ:</strong> Nếu có thắc mắc, vui lòng liên hệ qua Discord server hoặc Facebook fanpage của giải đấu
+                    </div>
+                    <button type="submit" class="submit-button">Gửi đăng ký</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('ctvForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validation
+            const requiredFields = this.querySelectorAll('[required]');
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    isValid = false;
+                    field.style.borderColor = '#ff006e';
+                } else {
+                    field.style.borderColor = '#3a86ff';
+                }
+            });
+            
+            if (!isValid) {
+                alert('Vui lòng điền đầy đủ các thông tin bắt buộc (có dấu *)');
+                return;
+            }
+            
+            // Collect form data
+            const formData = new FormData(this);
+            const data = {};
+            for (let [key, value] of formData.entries()) {
+                data[key] = value;
+            }
+            
+            // Display success message
+            alert('Cảm ơn bạn đã đăng ký! Thông tin của bạn đã được ghi nhận.\n\nBan tổ chức sẽ liên hệ với bạn trong vòng 3-5 ngày làm việc.\n\nChúc bạn may mắn!');
+            
+            // Log form data (for demonstration)
+            console.log('Form Data:', data);
+            
+            // In real implementation, you would send this data to your server
+            // fetch('/submit-ctv-form', {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //     },
+            //     body: JSON.stringify(data)
+            // });
+        });
+
+        // Add some interactive effects
+        document.querySelectorAll('.form-input, .form-select, .form-textarea').forEach(element => {
+            element.addEventListener('focus', function() {
+                this.style.transform = 'scale(1.02)';
+            });
+            
+            element.addEventListener('blur', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+
+        // Auto-resize textareas
+        document.querySelectorAll('.form-textarea').forEach(textarea => {
+            textarea.addEventListener('input', function() {
+                this.style.height = 'auto';
+                this.style.height = this.scrollHeight + 'px';
+            });
+        });
+    </script>
+</body>
+</html>
